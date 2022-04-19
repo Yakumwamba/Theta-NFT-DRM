@@ -2,9 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import {
+  Mainnet,
+  DAppProvider,
+  useEtherBalance,
+  useEthers,
+  Config,
+} from '@usedapp/core'
 
+import { formatEther } from '@ethersproject/units'
+import { getDefaultProvider } from 'ethers'
+
+const config = {
+  readOnlyChainId: Mainnet.chainId,
+  readOnlyUrls: {
+    [Mainnet.chainId]: getDefaultProvider('mainnet'),
+  },
+}
 ReactDOM.render(
-    <App />,
+  <DAppProvider config={config}>
+  <App />
+</DAppProvider>,
   document.getElementById('root')
 );
 
